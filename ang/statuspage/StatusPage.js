@@ -15,13 +15,8 @@
             });
           },
           statuses: function(crmApi) {
-            //TODO MOCK
-            return {
-              'status_name_uno': { title: 'Yaas', name: 'status_name_uno', desc: 'helio specular contiguous orthogonality', severity: 'EMERGENCY'},
-              'status_name_dos': { title: 'Nough', name: 'status_name_dos', desc:'ardvaark antelope artifice acrobat', severity: 'WARNING'},
-              'status_name_tres': { title: 'Maybe', name: 'status_name_tres', desc:'quintraine quadrile quince', severity: 'INFORMATION' },
-              'status_name_quatro': { title: 'Definitely', name: 'status_name_quatro', desc: 'princely perfumed petunia pudendum', severity: 'NOTICE'}
-            };
+            var result = crmApi('System', 'check');
+            return result;
           }
         }
       });
