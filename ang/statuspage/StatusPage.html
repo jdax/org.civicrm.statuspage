@@ -1,6 +1,5 @@
 <div class="crm-container">
   <div crm-ui-debug="myContact"></div>
-  <div crm-ui-debug="statuses"></div>
 
   <form name="myForm" crm-ui-id-scope>
 
@@ -9,9 +8,7 @@
     </div>
 
     <div crm-ui-accordion="{title: ts('Greeting')}">
-      <p ng-show="myContact.first_name">{{ ts('Hello, %1.', {1: myContact.first_name}) }}</p>
-
-      <p ng-show="!myContact.first_name">{{ ts('Hello, stranger.') }}</p>
+      HEADER TEXT <br />This should probably not be an accordion.
     </div>
 
     <div id="crm-status-list" ng-repeat="status in statuses.values track by status.name">
@@ -20,33 +17,6 @@
         {{status.message}}<br />
         {{status.severity}}
     </div>
-    </div>
-    <div crm-ui-accordion="{title: ts('About Me')}" >
-      <div class="crm-block">
-        <div class="crm-group">
-          <div crm-ui-field="{name: 'myForm.first_name', title: ts('Name'), help: hs('full_name')}">
-            <input
-              crm-ui-accordion="{}"
-              crm-ui-id="myForm.first_name"
-              name="first_name"
-              ng-model="myContact.first_name"
-              class="crm-form-text"
-              placeholder="{{ts('First')}}"
-              />
-            <input
-              crm-ui-id="myForm.last_name"
-              name="last_name"
-              ng-model="myContact.last_name"
-              class="crm-form-text"
-              placeholder="{{ts('Last')}}"
-              />
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <button ng-click="save()">{{ts('Save')}}</button>
-      </div>
     </div>
 
   </form>
