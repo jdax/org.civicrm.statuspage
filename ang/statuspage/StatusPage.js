@@ -17,13 +17,21 @@
           statuses: function(crmApi) {
             return crmApi('System', 'check')
               .catch(function(obj){console.log(obj)})
-              
+              .then(createStatusDisplayTitle)
             ;
           }
         }
       });
     }
   );
+
+  function createStatusDisplayTitle(result){
+                var values = result.values;
+                _.each(values, function(status){
+                  status.displayTitle = status.name+' - '+status.title+' - '+status.severity.toUpperCase();
+                });
+                return result;
+              }
 
   angular.module('statuspage').filter('trusted', function($sce){ return $sce.trustAsHtml; });
 
