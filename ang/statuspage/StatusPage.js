@@ -25,13 +25,17 @@
     }
   );
 
-  function createStatusDisplayTitle(result){
-                var values = result.values;
-                _.each(values, function(status){
-                  status.displayTitle = status.name+' - '+status.title+' - '+status.severity.toUpperCase();
-                });
-                return result;
-              }
+ /**
+  * add property to results of api.System.check
+  * @param {type} apiResults
+  * @returns apiResults
+  */
+  function createStatusDisplayTitle(apiResults){
+    _.each(apiResults.values, function(status){
+      status.displayTitle = status.name+' - '+status.title+' - '+status.severity.toUpperCase();
+    });
+    return apiResults;
+  }
 
   angular.module('statuspage').filter('trusted', function($sce){ return $sce.trustAsHtml; });
 
