@@ -1,1 +1,82 @@
 /* Add any CSS rules for Angular module "statuspage" */
+
+/* Error Severity */
+#crm-status-list .crm-severity-emergency .crm-accordion-header,
+#crm-status-list .crm-severity-alert .crm-accordion-header,
+#crm-status-list .crm-severity-critical .crm-accordion-header,
+#crm-status-list .crm-severity-error  .crm-accordion-header {
+  background-color: red;
+}
+
+#crm-status-list .crm-severity-emergency .crm-accordion-header:hover,
+#crm-status-list .crm-severity-alert .crm-accordion-header:hover,
+#crm-status-list .crm-severity-critical .crm-accordion-header:hover,
+#crm-status-list .crm-severity-error  .crm-accordion-header:hover {
+  background-color: #ff6600;
+}
+
+#crm-status-list .crm-severity-emergency .crm-accordion-header.active,
+#crm-status-list .crm-severity-alert .crm-accordion-header.active,
+#crm-status-list .crm-severity-critical .crm-accordion-header.active,
+#crm-status-list .crm-severity-error  .crm-accordion-header.active {
+  font-weight: bold;
+  background-color: red;
+}
+
+#crm-status-list .crm-severity-emergency .crm-accordion-header.active:hover,
+#crm-status-list .crm-severity-alert .crm-accordion-header.active:hover,
+#crm-status-list .crm-severity-critical .crm-accordion-header.active:hover,
+#crm-status-list .crm-severity-error  .crm-accordion-header.active:hover {
+  font-weight: bold;
+  background-color: #ff6600;
+}
+
+/* Warning Severity */
+#crm-status-list .crm-severity-warning .crm-accordion-header,
+#crm-status-list .crm-severity-notice  .crm-accordion-header
+{
+  background-color: orange;
+}
+
+#crm-status-list .crm-severity-warning .crm-accordion-header:hover,
+#crm-status-list .crm-severity-notice  .crm-accordion-header:hover
+{
+  background-color: #ffcc00;
+}
+
+#crm-status-list .crm-severity-warning .crm-accordion-header.active,
+#crm-status-list .crm-severity-notice  .crm-accordion-header.active
+{
+  font-weight: bold;
+  background-color: white;
+}
+
+#crm-status-list .crm-severity-warning .crm-accordion-header.active:hover,
+#crm-status-list .crm-severity-notice  .crm-accordion-header.active:hover
+{
+  font-weight: bold;
+  background-color: #ffcc00;
+}
+
+/* All OK Severity */
+#crm-status-list .crm-severity-info .crm-accordion-header,
+#crm-status-list .crm-severity-debug .crm-accordion-header {
+  background-color: green;
+}
+
+#crm-status-list .crm-severity-info .crm-accordion-header.active,
+#crm-status-list .crm-severity-debug .crm-accordion-header.active {
+  font-weight: bold;
+  background-color: green;
+}
+
+#crm-status-list .crm-severity-info .crm-accordion-header:hover,
+#crm-status-list .crm-severity-debug .crm-accordion-header:hover {
+  background-color: #00cc00;
+}
+
+#crm-status-list .crm-severity-info .crm-accordion-header.active:hover,
+#crm-status-list .crm-severity-debug .crm-accordion-header.active:hover {
+  font-weight: bold;
+  background-color: #00cc00;
+}
