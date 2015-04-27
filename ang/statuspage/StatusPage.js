@@ -15,13 +15,17 @@
             });
           },
           statuses: function(crmApi) {
-            var result = crmApi('System', 'check');
-            return result;
+            return crmApi('System', 'check')
+              .catch(function(obj){console.log(obj)})
+              
+            ;
           }
         }
       });
     }
   );
+
+  angular.module('statuspage').filter('trusted', function($sce){ return $sce.trustAsHtml; });
 
   // The controller uses *injection*. This default injects a few things:
   //   $scope -- This is the set of variables shared between JS and HTML.
