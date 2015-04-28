@@ -17,9 +17,13 @@
           statuses: function(crmApi) {
             return crmApi('System', 'check')
               .catch(function(obj){console.log(obj)})
-              .then(createStatusDisplayTitle)
-              .then(function(obj) {
-                return _.each(obj.values, function(status){
+              .then(function(apiResults){
+                return _.each(apiResults.values, function(status){
+                  status.displayTitle = status.name+' - '+status.title+' - '+status.severity.toUpperCase();
+                });
+              })
+              .then(function(apiResults) {
+                return _.each(apiResults.values, function(status){
                   status.showSnoozeOptions = false;
                 });
               })
@@ -29,18 +33,6 @@
       });
     }
   );
-
- /**
-  * add property to results of api.System.check
-  * @param {type} apiResults
-  * @returns apiResults
-  */
-  function createStatusDisplayTitle(apiResults){
-    _.each(apiResults.values, function(status){
-      status.displayTitle = status.name+' - '+status.title+' - '+status.severity.toUpperCase();
-    });
-    return apiResults;
-  }
 
   /**
    * remove a status after it has been hushed/snoozed
