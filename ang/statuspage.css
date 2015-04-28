@@ -32,30 +32,49 @@
 }
 
 /* Warning Severity */
-#crm-status-list .crm-severity-warning .crm-accordion-header,
-#crm-status-list .crm-severity-notice  .crm-accordion-header
+#crm-status-list .crm-severity-warning .crm-accordion-header
 {
   background-color: orange;
 }
 
-#crm-status-list .crm-severity-warning .crm-accordion-header:hover,
-#crm-status-list .crm-severity-notice  .crm-accordion-header:hover
+#crm-status-list .crm-severity-warning .crm-accordion-header:hover
 {
   background-color: #ffcc00;
 }
 
-#crm-status-list .crm-severity-warning .crm-accordion-header.active,
+#crm-status-list .crm-severity-warning .crm-accordion-header.active
+{
+  font-weight: bold;
+  background-color: orange;
+}
+
+#crm-status-list .crm-severity-warning .crm-accordion-header.active:hover
+{
+  font-weight: bold;
+  background-color: #ffcc00;
+}
+
+/* Not Okay - Not Warning */
+#crm-status-list .crm-severity-notice  .crm-accordion-header
+{
+  background-color: #000080;
+}
+
+#crm-status-list .crm-severity-notice  .crm-accordion-header:hover
+{
+  background-color: #0066CC;
+}
+
 #crm-status-list .crm-severity-notice  .crm-accordion-header.active
 {
   font-weight: bold;
-  background-color: white;
+  background-color: #000080;
 }
 
-#crm-status-list .crm-severity-warning .crm-accordion-header.active:hover,
 #crm-status-list .crm-severity-notice  .crm-accordion-header.active:hover
 {
   font-weight: bold;
-  background-color: #ffcc00;
+  background-color: #0066CC;
 }
 
 /* All OK Severity */
