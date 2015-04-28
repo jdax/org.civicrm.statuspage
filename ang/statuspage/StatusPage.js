@@ -18,14 +18,16 @@
             return crmApi('System', 'check')
               .catch(function(obj){console.log(obj)})
               .then(function(apiResults){
-                return _.each(apiResults.values, function(status){
+                _.each(apiResults.values, function(status){
                   status.displayTitle = status.name+' - '+status.title+' - '+status.severity.toUpperCase();
                 });
+                return apiResults;
               })
               .then(function(apiResults) {
-                return _.each(apiResults.values, function(status){
+                _.each(apiResults.values, function(status){
                   status.showSnoozeOptions = false;
                 });
+                return apiResults;
               })
             ;
           }
