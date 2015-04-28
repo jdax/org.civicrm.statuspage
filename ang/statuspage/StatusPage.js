@@ -37,6 +37,18 @@
     return apiResults;
   }
 
+  /**
+   * remove a status after it has been hushed/snoozed
+   * @param {type} $scope
+   * @param {type} statusName
+   * @returns void
+   */
+   function rmStatus($scope, statusName) {
+    $scope.statuses.values =  _.reject($scope.statuses.values, function(status) {
+      return status.name === statusName; // or some complex logic
+    });
+  }
+
   angular.module('statuspage').filter('trusted', function($sce){ return $sce.trustAsHtml; });
 
   angular.module('statuspage').controller('StatuspageStatusPage', function($scope, crmApi, crmStatus, crmUiHelp, myContact, statuses) {
@@ -57,6 +69,7 @@
           "name": name,
           "ignore_severity": severity
         })
+        .then(function(){rmStatus($scope, name);})
       );
     }
   });
