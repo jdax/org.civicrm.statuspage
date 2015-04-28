@@ -17,7 +17,10 @@
             {{status.title}}<br />
             <div class="crm-status-message-body" ng-bind-html="status.message | trusted"></div>
             <div class="actions">
-              <a ng-click="snooze" class="crm-hover-button" crm-icon="clock" title="{{ts('Snooze')}}"></a>
+              <div class="status-snooze-options" ng-show="status.showSnoozeOptions">
+                SHOW OPTIONS
+              </div>
+              <a ng-click="showSnoozeOptions(status)" class="crm-hover-button" crm-icon="clock" title="{{ts('Snooze')}}"></a>
               <a ng-click="hush(status.name, status.severity)" class="crm-hover-button" crm-icon="cancel" title="{{ts('Hush')}}"></a>
             </div>
           </div>

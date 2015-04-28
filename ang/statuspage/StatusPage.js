@@ -18,6 +18,7 @@
             return crmApi('System', 'check')
               .catch(function(obj){console.log(obj)})
               .then(createStatusDisplayTitle)
+              .then(addShowSnoozeOptions)
             ;
           }
         }
@@ -33,6 +34,13 @@
   function createStatusDisplayTitle(apiResults){
     _.each(apiResults.values, function(status){
       status.displayTitle = status.name+' - '+status.title+' - '+status.severity.toUpperCase();
+    });
+    return apiResults;
+  }
+
+  function addShowSnoozeOptions(apiResults) {
+    _.each(apiResults.values, function(status){
+      status.showSnoozeOptions = false;
     });
     return apiResults;
   }
@@ -61,7 +69,7 @@
 
     $scope.statuses = statuses;
 
-    $scope.hush = function hush(name, severity) {
+    $scope.hush = function(name, severity) {
       return  crmStatus(
         { start: ts('Saving Status Preference...')      , success: ts('Preference Saved') },
         crmApi('StatusPreference', 'create', {
@@ -72,6 +80,9 @@
         .then(function(){rmStatus($scope, name);})
       );
     }
+    $scope.showSnoozeOptions = function(status) {
+      status.showSnoozeOptions = !status.showSnoozeOptions;
+    };
   });
 
 })(angular, CRM.$, CRM._);
