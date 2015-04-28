@@ -18,7 +18,11 @@
             return crmApi('System', 'check')
               .catch(function(obj){console.log(obj)})
               .then(createStatusDisplayTitle)
-              .then(addShowSnoozeOptions)
+              .then(function(obj) {
+                return _.each(obj.values, function(status){
+                  status.showSnoozeOptions = false;
+                });
+              })
             ;
           }
         }
@@ -34,13 +38,6 @@
   function createStatusDisplayTitle(apiResults){
     _.each(apiResults.values, function(status){
       status.displayTitle = status.name+' - '+status.title+' - '+status.severity.toUpperCase();
-    });
-    return apiResults;
-  }
-
-  function addShowSnoozeOptions(apiResults) {
-    _.each(apiResults.values, function(status){
-      status.showSnoozeOptions = false;
     });
     return apiResults;
   }
