@@ -5,14 +5,14 @@
 #crm-status-list .crm-severity-alert .crm-accordion-header,
 #crm-status-list .crm-severity-critical .crm-accordion-header,
 #crm-status-list .crm-severity-error  .crm-accordion-header {
-  background-color: red;
+  background-color: #DD0000;
 }
 
 #crm-status-list .crm-severity-emergency .crm-accordion-header:hover,
 #crm-status-list .crm-severity-alert .crm-accordion-header:hover,
 #crm-status-list .crm-severity-critical .crm-accordion-header:hover,
 #crm-status-list .crm-severity-error  .crm-accordion-header:hover {
-  background-color: #ff6600;
+  background-color: red;
 }
 
 #crm-status-list .crm-severity-emergency .crm-accordion-header.active,
@@ -20,7 +20,7 @@
 #crm-status-list .crm-severity-critical .crm-accordion-header.active,
 #crm-status-list .crm-severity-error  .crm-accordion-header.active {
   font-weight: bold;
-  background-color: red;
+  background-color: #DD0000;
 }
 
 #crm-status-list .crm-severity-emergency .crm-accordion-header.active:hover,
@@ -28,7 +28,7 @@
 #crm-status-list .crm-severity-critical .crm-accordion-header.active:hover,
 #crm-status-list .crm-severity-error  .crm-accordion-header.active:hover {
   font-weight: bold;
-  background-color: #ff6600;
+  background-color: red;
 }
 
 /* Warning Severity */
@@ -61,22 +61,22 @@
 /* All OK Severity */
 #crm-status-list .crm-severity-info .crm-accordion-header,
 #crm-status-list .crm-severity-debug .crm-accordion-header {
-  background-color: green;
+  background-color: #006633;
 }
 
 #crm-status-list .crm-severity-info .crm-accordion-header.active,
 #crm-status-list .crm-severity-debug .crm-accordion-header.active {
   font-weight: bold;
-  background-color: green;
+  background-color: #006633;
 }
 
 #crm-status-list .crm-severity-info .crm-accordion-header:hover,
 #crm-status-list .crm-severity-debug .crm-accordion-header:hover {
-  background-color: #00cc00;
+  background-color: #00CC00;
 }
 
 #crm-status-list .crm-severity-info .crm-accordion-header.active:hover,
 #crm-status-list .crm-severity-debug .crm-accordion-header.active:hover {
   font-weight: bold;
-  background-color: #00cc00;
+  background-color: #00CC00;
 }
