@@ -65,6 +65,17 @@
         })
       );
     };
+
+    $scope.hush = function hush(name, severity) {
+      return  crmStatus(
+        { start: ts('Saving Status Preference...')      , success: ts('Preference Saved') },
+        crmApi('StatusPreference', 'create', {
+          "sequential": 1,
+          "name": name,
+          "ignore_severity": severity
+        })
+      );
+    }
   });
 
 })(angular, CRM.$, CRM._);
