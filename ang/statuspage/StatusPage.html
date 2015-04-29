@@ -11,8 +11,6 @@
       HEADER TEXT
       <button ng-if="(path === '/hushed')" ng-click="navigator.redirect('#/status')">Hide Hushed</button>
       <button ng-if="(path === '/status')" ng-click="navigator.redirect('#/hushed')">Show Hushed</button>
-      <button ng-if="(path === '/manage')" ng-click="navigator.redirect('#/status')">Show Statuses</button>
-      <button ng-click="navigator.redirect('#/manage')">Manage Preferences</button>
     </div>
     <div id="crm-status-list" ng-repeat="status in statuses.values track by status.name">
       <div crm-ui-accordion="{title: status.displayTitle, collapsed: false }" class="crm-severity-{{status.severity}}">

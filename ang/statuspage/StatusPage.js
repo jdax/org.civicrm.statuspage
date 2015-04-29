@@ -22,26 +22,6 @@
           }
         }
       });
-
-      $routeProvider.when('/manage', {
-        controller: 'statuspageManage',
-        templateUrl: '~/statuspage/ManagePage.html',
-
-        resolve: {
-          statusPrefs: function(crmApi) {
-            return crmApi('StatusPreference', 'get')
-              .then(function(apiResults) {
-                _.each(apiResults.values, function(pref){
-                  pref.snoozeOptions = {
-                    severity: pref.ignore_severity
-                  };
-                });
-                return apiResults;
-              })
-            ;
-          },
-        }
-      });
     }
   );
 
@@ -144,16 +124,5 @@
     };
   });
 
-  angular.module('statuspage').controller('statuspageManage',
-    function($scope, $location, crmApi, crmStatus, crmUiHelp, statusPrefs, crmNavigator) {
-      // The ts() and hs() functions help load strings for this module.
-      var ts = $scope.ts = CRM.ts('statuspage');
-      var hs = $scope.hs = crmUiHelp({file: 'CRM/statuspage/StatusPage'}); // See: templates/CRM/statuspage/StatusPage.hlp
-      $scope.path = $location.path();
-      $scope.navigator = crmNavigator;
-      $scope.preferences = statusPrefs.values;
-      console.log($scope.preferences);
-
-  });
 
 })(angular, CRM.$, CRM._);
