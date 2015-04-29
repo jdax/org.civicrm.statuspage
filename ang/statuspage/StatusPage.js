@@ -14,6 +14,9 @@
               return: ['first_name', 'last_name']
             });
           },
+          statusPrefs: function(crmApi) {
+            return crmApi('StatusPreference', 'get');
+          },
           statuses: function(crmApi) {
             return crmApi('System', 'check')
               .catch(function(obj){console.log(obj)})
@@ -25,7 +28,10 @@
               })
               .then(function(apiResults) {
                 _.each(apiResults.values, function(status){
-                  status.showSnoozeOptions = false;
+                  status.snoozeOptions = {
+                    show: false,
+                    severity: status.severity
+                  };
                 });
                 return apiResults;
               })
@@ -50,6 +56,29 @@
 
   angular.module('statuspage').filter('trusted', function($sce){ return $sce.trustAsHtml; });
 
+  angular.module('statuspage').directive('crmSnoozeOptions', function(statuspageSeverityList) {
+    return {
+      templateUrl: '~/statuspage/SnoozeOptions.html',
+      transclude: true,
+      link: function(scope, element, attr) {
+        scope.severityList = statuspageSeverityList;
+      }
+    };
+  });
+
+  angular.module('statuspage').service('statuspageSeverityList', function() {
+    return [
+      'emergency',
+      'alert',
+      'critical',
+      'error',
+      'warning',
+      'notice',
+      'info',
+      'debug'
+    ];
+  });
+
   angular.module('statuspage').controller('StatuspageStatusPage', function($scope, crmApi, crmStatus, crmUiHelp, myContact, statuses) {
     // The ts() and hs() functions help load strings for this module.
     var ts = $scope.ts = CRM.ts('statuspage');
@@ -71,8 +100,21 @@
         .then(function(){rmStatus($scope, name);})
       );
     }
+
+    $scope.snooze = function(status) {
+      $scope.showSnoozeOptions(status);
+      return crmStatus(
+        { status: ts('Saving Status Preference...')   , success: ts('Preference Saved') },
+          crmApi('StatusPreference', 'create', {
+            "sequential": 1,
+            "name": status.name,
+            "ignore_severity": status.snoozeOptions.severity,
+            "hush_until": status.snoozeOptions.until
+          })
+      );
+    };
     $scope.showSnoozeOptions = function(status) {
-      status.showSnoozeOptions = !status.showSnoozeOptions;
+      status.snoozeOptions.show = !status.snoozeOptions.show;
     };
   });
 
