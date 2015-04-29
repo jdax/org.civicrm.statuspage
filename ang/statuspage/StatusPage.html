@@ -24,7 +24,8 @@
               <div class="status-snooze-options" ng-show="status.snoozeOptions.show">
                 <div crm-snooze-options></div>
               </div>
-              <a ng-click="showSnoozeOptions(status)" class="crm-hover-button" crm-icon="clock" title="{{ts('Snooze')}}"></a>
+              <a ng-click="showSnoozeOptions(status)" ng-show="!status.snoozeOptions.show" class="crm-hover-button" crm-icon="clock" title="{{ts('Snooze')}}"></a>
+              <a ng-click="showSnoozeOptions(status)" ng-show="status.snoozeOptions.show" class="crm-hover-button" crm-icon="close" title="{{ts('Close')}}"></a>
               <a ng-click="hush(status.name, status.severity)" class="crm-hover-button" crm-icon="cancel" title="{{ts('Hush')}}"></a>
             </div>
           </div>
