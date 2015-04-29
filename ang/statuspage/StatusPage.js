@@ -1,46 +1,58 @@
 (function(angular, $, _) {
 
-  angular.module('statuspage').config(function($routeProvider) {
+  angular.module('statuspage').config( function($routeProvider) {
       $routeProvider.when('/status', {
-        controller: 'StatuspageStatusPage',
+        controller: 'statuspageStatusPage',
         templateUrl: '~/statuspage/StatusPage.html',
 
-        // If you need to look up data when opening the page, list it out
-        // under "resolve".
         resolve: {
-          myContact: function(crmApi) {
-            return crmApi('Contact', 'getsingle', {
-              id: 'user_contact_id',
-              return: ['first_name', 'last_name']
-            });
-          },
-          statusPrefs: function(crmApi) {
-            return crmApi('StatusPreference', 'get');
-          },
-          statuses: function(crmApi) {
-            return crmApi('System', 'check')
-              .catch(function(obj){console.log(obj)})
-              .then(function(apiResults){
-                _.each(apiResults.values, function(status){
-                  status.displayTitle = status.name+' - '+status.title+' - '+status.severity.toUpperCase();
-                });
-                return apiResults;
-              })
-              .then(function(apiResults) {
-                _.each(apiResults.values, function(status){
-                  status.snoozeOptions = {
-                    show: false,
-                    severity: status.severity
-                  };
-                });
-                return apiResults;
-              })
-            ;
+          statuses: function(statuspageGetStatuses) {
+            return statuspageGetStatuses(0);
           }
         }
       });
+
+      $routeProvider.when('/hushed', {
+        controller: 'statuspageStatusPage',
+        templateUrl: '~/statuspage/StatusPage.html',
+
+        resolve: {
+          statuses: function(statuspageGetStatuses) {
+            return statuspageGetStatuses(1);
+          }
+        }
+      });
+
+      $routeProvider.when('/manage', {
+        controller: 'statuspageManage',
+        templateUrl: '~/statuspage/ManagePage.html',
+
+        resolve: {}
+      });
     }
   );
+
+  angular.module('statuspage').service('statuspageGetStatuses', function(crmApi) {
+    return function(hushed) {
+      return crmApi('System', 'check', { "show_hushed": hushed })
+        .catch(function(obj){console.log(obj)})
+        .then(function(apiResults){
+          _.each(apiResults.values, function(status){
+            status.displayTitle = status.name+' - '+status.title+' - '+status.severity.toUpperCase();
+          });
+          return apiResults;
+        })
+        .then(function(apiResults) {
+          _.each(apiResults.values, function(status){
+            status.snoozeOptions = {
+              show: false,
+              severity: status.severity
+            };
+          });
+          return apiResults;
+        })
+      }
+  });
 
   /**
    * remove a status after it has been hushed/snoozed
@@ -79,14 +91,14 @@
     ];
   });
 
-  angular.module('statuspage').controller('StatuspageStatusPage', function($scope, crmApi, crmStatus, crmUiHelp, myContact, statuses) {
+  angular.module('statuspage').controller('statuspageStatusPage',
+    function($scope, $location, crmApi, crmStatus, crmUiHelp, statuses, crmNavigator) {
     // The ts() and hs() functions help load strings for this module.
     var ts = $scope.ts = CRM.ts('statuspage');
     var hs = $scope.hs = crmUiHelp({file: 'CRM/statuspage/StatusPage'}); // See: templates/CRM/statuspage/StatusPage.hlp
 
-    // We have myContact available in JS. We also want to reference it in HTML.
-    $scope.myContact = myContact;
-
+    $scope.path = $location.path();
+    $scope.navigator = crmNavigator;
     $scope.statuses = statuses;
 
     $scope.hush = function(name, severity) {
