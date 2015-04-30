@@ -25,18 +25,15 @@
     }
   );
 
-  angular.module('statuspage').service('statuspageGetStatuses', function(crmApi) {
+  angular.module('statuspage').service('statuspageGetStatuses', function(crmApi, statuspageSeverityList) {
     return function(hushed) {
       return crmApi('System', 'check', { "show_hushed": hushed })
         .catch(function(obj){console.log(obj)})
         .then(function(apiResults){
           _.each(apiResults.values, function(status){
-            status.displayTitle = status.name+' - '+status.title+' - '+status.severity.toUpperCase();
-          });
-          return apiResults;
-        })
-        .then(function(apiResults) {
-          _.each(apiResults.values, function(status){
+            status.severity_id = status.severity;
+            status.severity = statuspageSeverityList[status.severity];
+            status.displayTitle = status.name+' - '+status.title +' - '+status.severity.toUpperCase();
             status.snoozeOptions = {
               show: false,
               severity: status.severity
@@ -73,16 +70,7 @@
   });
 
   angular.module('statuspage').service('statuspageSeverityList', function() {
-    return [
-      'emergency',
-      'alert',
-      'critical',
-      'error',
-      'warning',
-      'notice',
-      'info',
-      'debug'
-    ];
+    return ['debug', 'info', 'notice', 'warning', 'error', 'critical', 'alert', 'emergency'];
   });
 
   angular.module('statuspage').controller('statuspageStatusPage',
