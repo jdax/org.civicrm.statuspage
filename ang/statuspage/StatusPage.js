@@ -8,6 +8,9 @@
         resolve: {
           statuses: function(statuspageGetStatuses) {
             return statuspageGetStatuses(0);
+          },
+          statusModel: function(statuspageStatusModel,statuspageGetStatuses, statuspageGetPreferences) {
+            return statuspageStatusModel(statuspageGetStatuses, statuspageGetPreferences)
           }
         }
       });
@@ -24,6 +27,30 @@
       });
     }
   );
+
+/**
+ * get status messages
+ * build snooze options object reconciled with preferences
+ *
+ */
+  angular.module('statuspage').service('statuspageStatusModel', function(crmApi, statuspageGetStatuses, statuspageGetPreferences){
+    return function() {
+      var statusModel = {
+        hushed: false,
+        getStatuses: statuspageGetStatuses,
+        getPreferences: statuspageGetPreferences,
+      };
+      statusModel.statuses = statusModel
+        .getStatuses(statusModel.hushed)
+          .then(function(result){
+            result.preferences = statusModel.getPreferences();
+            return result;
+          })
+          .then(function(result){
+            CRM.log('here');
+          });
+    };
+  });
 
   angular.module('statuspage').service('statuspageGetStatuses', function(crmApi, statuspageSeverityList) {
     return function(hushed) {
@@ -42,6 +69,20 @@
           return apiResults;
         })
       }
+  });
+
+  angular.module('statuspage').service('statuspageGetPreferences', function(crmApi) {
+    return function(crmApi) {
+      return crmApi('StatusPreference', 'get')
+        .then(function(apiResults) {
+          _.each(apiResults.values, function(pref){
+            pref.snoozeOptions = {
+              severity: pref.ignore_severity
+            };
+          });
+          return apiResults;
+        });
+    };
   });
 
   /**
