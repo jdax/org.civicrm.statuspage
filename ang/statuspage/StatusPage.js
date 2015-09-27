@@ -77,7 +77,7 @@
         .then(function(apiResults) {
           _.each(apiResults.values, function(pref){
             pref.snoozeOptions = {
-              severity: pref.ignore_severity
+              severity: pref.hush_severity
             };
           });
           return apiResults;
@@ -130,7 +130,7 @@
         crmApi('StatusPreference', 'create', {
           "sequential": 1,
           "name": name,
-          "ignore_severity": severity
+          "hush_severity": severity
         })
         .then(function(){rmStatus($scope, name);})
       );
@@ -143,8 +143,8 @@
           crmApi('StatusPreference', 'create', {
             "sequential": 1,
             "name": status.name,
-            "ignore_severity": status.snoozeOptions.severity,
-            "hush_until": status.snoozeOptions.until
+            "hush_severity": status.snoozeOptions.severity,
+            "snooze_until": status.snoozeOptions.until
           })
       );
     };
