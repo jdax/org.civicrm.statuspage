@@ -1,7 +1,7 @@
 <div class="snooze-options-form">
 
 <div class="crm-block" ng-form="snoozeOptions" crm-ui-id-scope>
-  <div class="crm-group">
+  <!-- <div class="crm-group">
     <div crm-ui-field="{name: 'snoozeOptions.severity', title: ts('Severity Threshold')}">
       <div >
         <select
@@ -13,7 +13,7 @@
           <option ng-repeat="severity in severityList">{{severity}}</option>
         </select>
       </div>
-    </div>
+    </div> -->
     <div crm-ui-field="{name: 'snoozeOptions.until', title: ts('Suppress Until')}">
       <div >
         <input name="until" crm-ui-datepicker="{dateFormat: 'yy/mm/d', time: false}" ng-model="status.snoozeOptions.until" />

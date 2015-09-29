@@ -1,4 +1,33 @@
 (function(angular, $, _) {
+
+  angular.module('statuspage').config( function($routeProvider) {
+    $routeProvider.when('/status', {
+      controller: 'statuspageStatusPage',
+      templateUrl: '~/statuspage/StatusPage.html',
+
+      resolve: {
+        statuses: function(statuspageGetStatuses) {
+          return statuspageGetStatuses(0);
+        },
+        statusModel: function(statuspageStatusModel) {
+          return statuspageStatusModel()
+        }
+      }
+    });
+
+    $routeProvider.when('/hushed', {
+      controller: 'statuspageStatusPage',
+      templateUrl: '~/statuspage/StatusPage.html',
+
+      resolve: {
+        statuses: function(statuspageGetStatuses) {
+          return statuspageGetStatuses(1);
+        }
+      }
+    });
+  }
+);
+
   angular.module('statuspage').controller('statuspageStatusPage',
     function($scope, $location, crmApi, crmStatus, crmUiHelp, statuses, crmNavigator) {
     // The ts() and hs() functions help load strings for this module.
@@ -15,7 +44,7 @@
         crmApi('StatusPreference', 'create', {
           "sequential": 1,
           "name": name,
-          "hush_severity": severity
+          "ignore_severity": severity
         })
         .then(function(){rmStatus($scope, name);})
       );
@@ -28,8 +57,8 @@
           crmApi('StatusPreference', 'create', {
             "sequential": 1,
             "name": status.name,
-            "hush_severity": status.snoozeOptions.severity,
-            "snooze_until": status.snoozeOptions.until
+            "ignore_severity": status.snoozeOptions.severity,
+            "hush_until": status.snoozeOptions.until
           })
       );
     };
@@ -37,4 +66,18 @@
       status.snoozeOptions.show = !status.snoozeOptions.show;
     };
   });
+
+  /**
+   * remove a status after it has been hushed/snoozed
+   * @param {type} $scope
+   * @param {type} statusName
+   * @returns void
+   */
+   function rmStatus($scope, statusName) {
+    $scope.statuses.values =  _.reject($scope.statuses.values,
+      function(status) {
+        return status.name === statusName;
+    });
+  }
+
 })(angular, CRM.$, CRM._);
