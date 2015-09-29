@@ -1,0 +1,11 @@
+(function(angular, $, _) {
+  angular.module('statuspage').directive('crmSnoozeOptions', function(statuspageSeverityList) {
+    return {
+      templateUrl: '~/statuspage/SnoozeOptions.html',
+      transclude: true,
+      link: function(scope, element, attr) {
+        scope.severityList = statuspageSeverityList;
+      }
+    };
+  });
+})(angular, CRM.$, CRM._);
