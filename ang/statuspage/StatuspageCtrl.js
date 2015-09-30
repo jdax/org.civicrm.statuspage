@@ -48,7 +48,19 @@
         })
         .then(function(){rmStatus($scope, name);})
       );
-    }
+    };
+    $scope.unhush = function(name, severity) {
+      return  crmStatus(
+        { start: ts('Saving Status Preference...')      , success: ts('Preference Saved') },
+        crmApi('StatusPreference', 'create', {
+          "sequential": 1,
+          "name": name,
+          "ignore_severity": 0
+        })
+        .then(function(){rmStatus($scope, name);})
+      );
+    };
+
 
     $scope.snooze = function(status) {
       $scope.showSnoozeOptions(status);
