@@ -57,7 +57,6 @@
           "name": name,
           "ignore_severity": 0
         })
-        .then(function(){rmStatus($scope, name);})
       );
     };
 
