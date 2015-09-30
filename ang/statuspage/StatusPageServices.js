@@ -16,7 +16,6 @@
         .getStatuses(statusModel.hushed)
           .then(function(result){
             result.preferences = statuspageGetPreferences();
-//            CRM.log('here');
             return result;
           });
     };
@@ -57,16 +56,6 @@
 
 
   angular.module('statuspage').filter('trusted', function($sce){ return $sce.trustAsHtml; });
-
-  // angular.module('statuspage').directive('crmSnoozeOptions', function(statuspageSeverityList) {
-  //   return {
-  //     templateUrl: '~/statuspage/SnoozeOptions.html',
-  //     transclude: true,
-  //     link: function(scope, element, attr) {
-  //       scope.severityList = statuspageSeverityList;
-  //     }
-  //   };
-  // });
 
   angular.module('statuspage').service('statuspageSeverityList', function() {
     return ['debug', 'info', 'notice', 'warning', 'error', 'critical', 'alert', 'emergency'];
