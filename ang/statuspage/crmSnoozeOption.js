@@ -1,3 +1,5 @@
+// creates a directive for the snooze options page 
+
 (function(angular, $, _) {
   angular.module('statuspage').directive('crmSnoozeOptions', function(statuspageSeverityList) {
     return {

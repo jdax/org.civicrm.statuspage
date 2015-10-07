@@ -22,8 +22,8 @@
   });
 
   angular.module('statuspage').service('statuspageGetStatuses', function(crmApi, statuspageSeverityList) {
-    return function(hushed) {
-      return crmApi('System', 'check', { "show_hushed": hushed })
+    return function(apiFilter) {
+      return crmApi('System', 'check', apiFilter)
         .catch(function(obj){console.log(obj)})
         .then(function(apiResults){
           _.each(apiResults.values, function(status){
