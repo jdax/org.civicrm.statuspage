@@ -37,22 +37,6 @@
       }
     });
 
-    $routeProvider.when('/status/all', {
-      controller: 'statuspageStatusPage',
-      templateUrl: '~/statuspage/StatusPage.html',
-
-      resolve: {
-        statuses: function(statuspageGetStatuses) {
-          return statuspageGetStatuses({});
-        },
-        statusModel: function(statuspageStatusModel) {
-          return statuspageStatusModel();
-        },
-        preferences: function(statuspageGetPreferences){
-          return statuspageGetPreferences();
-        }
-      }
-    });
   }
 );
 
@@ -92,6 +76,7 @@
           "name": name,
           "ignore_severity": 0
         })
+        .then(function(){rmStatus($scope, name);})
       );
     };
 
@@ -105,7 +90,7 @@
             "name": status.name,
             "ignore_severity": status.snoozeOptions.severity,
             "hush_until": status.snoozeOptions.until
-          })
+          })        .then(function(){rmStatus($scope, status.name);})
       );
     };
     $scope.showSnoozeOptions = function(status) {
