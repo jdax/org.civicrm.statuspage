@@ -5,14 +5,14 @@
 #crm-status-list .crm-severity-alert .crm-accordion-header,
 #crm-status-list .crm-severity-critical .crm-accordion-header,
 #crm-status-list .crm-severity-error  .crm-accordion-header {
-  background-color: #DD0000;
+  background-color: #E43D2B;
 }
 
 #crm-status-list .crm-severity-emergency .crm-accordion-header:hover,
 #crm-status-list .crm-severity-alert .crm-accordion-header:hover,
 #crm-status-list .crm-severity-critical .crm-accordion-header:hover,
 #crm-status-list .crm-severity-error  .crm-accordion-header:hover {
-  background-color: red;
+  background-color: #DD0000;
 }
 
 #crm-status-list .crm-severity-emergency .crm-accordion-header.active,
@@ -20,7 +20,7 @@
 #crm-status-list .crm-severity-critical .crm-accordion-header.active,
 #crm-status-list .crm-severity-error  .crm-accordion-header.active {
   font-weight: bold;
-  background-color: #DD0000;
+  background-color: #E43D2B;
 }
 
 #crm-status-list .crm-severity-emergency .crm-accordion-header.active:hover,
@@ -28,74 +28,74 @@
 #crm-status-list .crm-severity-critical .crm-accordion-header.active:hover,
 #crm-status-list .crm-severity-error  .crm-accordion-header.active:hover {
   font-weight: bold;
-  background-color: red;
+  background-color: #DD0000;
 }
 
 /* Warning Severity */
 #crm-status-list .crm-severity-warning .crm-accordion-header
 {
-  background-color: orange;
+  background-color: #EDA737;
 }
 
 #crm-status-list .crm-severity-warning .crm-accordion-header:hover
 {
-  background-color: #ffcc00;
+  background-color: #F09E1A;
 }
 
 #crm-status-list .crm-severity-warning .crm-accordion-header.active
 {
   font-weight: bold;
-  background-color: orange;
+  background-color: #EDA737;
 }
 
 #crm-status-list .crm-severity-warning .crm-accordion-header.active:hover
 {
   font-weight: bold;
-  background-color: #ffcc00;
+  background-color: #F09E1A;
 }
 
 /* Not Okay - Not Warning */
 #crm-status-list .crm-severity-notice  .crm-accordion-header
 {
-  background-color: #000080;
+  background-color: #4A88DF;
 }
 
 #crm-status-list .crm-severity-notice  .crm-accordion-header:hover
 {
-  background-color: #0066CC;
+  background-color: #41477E;
 }
 
 #crm-status-list .crm-severity-notice  .crm-accordion-header.active
 {
   font-weight: bold;
-  background-color: #000080;
+  background-color: #4A88DF;
 }
 
 #crm-status-list .crm-severity-notice  .crm-accordion-header.active:hover
 {
   font-weight: bold;
-  background-color: #0066CC;
+  background-color: #41477E;
 }
 
 /* All OK Severity */
 #crm-status-list .crm-severity-info .crm-accordion-header,
 #crm-status-list .crm-severity-debug .crm-accordion-header {
-  background-color: #006633;
+  background-color: #00994D;
 }
 
 #crm-status-list .crm-severity-info .crm-accordion-header.active,
 #crm-status-list .crm-severity-debug .crm-accordion-header.active {
   font-weight: bold;
-  background-color: #006633;
+  background-color: #00994D;
 }
 
 #crm-status-list .crm-severity-info .crm-accordion-header:hover,
 #crm-status-list .crm-severity-debug .crm-accordion-header:hover {
-  background-color: #00CC00;
+  background-color: #006633;
 }
 
 #crm-status-list .crm-severity-info .crm-accordion-header.active:hover,
 #crm-status-list .crm-severity-debug .crm-accordion-header.active:hover {
   font-weight: bold;
-  background-color: #00CC00;
+  background-color: #006633;
 }
