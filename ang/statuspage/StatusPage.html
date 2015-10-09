@@ -14,23 +14,23 @@
       <button ng-if="(path === '/status')" ng-click="navigator.redirect('#/status/hushed')">Show snoozed and hushed</button>
     </div>
     <div id="crm-status-list" ng-repeat="status in statuses.values track by status.name">
-      <div crm-ui-accordion="{title: status.title, collapsed: false }" class="crm-severity-{{status.severity}}">
+      <h3 class="crm-severity-{{status.severity}}">
+      {{status.title}}
+        <div class="status-snooze-options" ng-show="status.snoozeOptions.show">
+          <div crm-snooze-options></div>
+        </div>
+          <a ng-click="showSnoozeOptions(status)" ng-show="!status.snoozeOptions.show" class="crm-hover-button" crm-icon="fa-clock-o" title="{{ts('Snooze')}}"></a>
+          <a ng-click="showSnoozeOptions(status)" ng-show="status.snoozeOptions.show" class="crm-hover-button" crm-icon="fa-times" title="{{ts('Close')}}"></a>
+          <a ng-if="(path === '/status')" ng-click="hush(status.name, status.severity)" class="crm-hover-button" crm-icon="fa-bell-slash-o" title="{{ts('Hush')}}"></a>
+          <a ng-if="(path === '/status/hushed')" ng-click="unhush(status.name)" class="crm-hover-button" crm-icon="fa-bell-o" title="{{ts('Unhush')}}"></a>
+      </h3>
+      <h4>
         <div class="crm-block">
           <div class="crm-group">
-            {{status.title}}<br />
             <div class="crm-status-message-body" ng-bind-html="status.message | trusted"></div>
-            <div class="actions">
-              <div class="status-snooze-options" ng-show="status.snoozeOptions.show">
-                <div crm-snooze-options></div>
-              </div>
-              <a ng-click="showSnoozeOptions(status)" ng-show="!status.snoozeOptions.show" class="crm-hover-button" crm-icon="fa-clock-o" title="{{ts('Snooze')}}"></a>
-              <a ng-click="showSnoozeOptions(status)" ng-show="status.snoozeOptions.show" class="crm-hover-button" crm-icon="fa-times" title="{{ts('Close')}}"></a>
-              <a ng-if="(path === '/status')" ng-click="hush(status.name, status.severity)" class="crm-hover-button" crm-icon="fa-bell-slash-o" title="{{ts('Hush')}}"></a>
-              <a ng-if="(path === '/status/hushed')" ng-click="unhush(status.name)" class="crm-hover-button" crm-icon="fa-bell-o" title="{{ts('Unhush')}}"></a>
-            </div>
           </div>
         </div>
-      </div>
+      </h4>
     </div>
 
   </form>
