@@ -61,7 +61,8 @@
         crmApi('StatusPreference', 'create', {
           "sequential": 1,
           "name": name,
-          "ignore_severity": severity
+          "ignore_severity": severity,
+          "hush_until":  ""
         })
         .then(function(){rmStatus($scope, name);})
       );
@@ -74,7 +75,8 @@
         crmApi('StatusPreference', 'create', {
           "sequential": 1,
           "name": name,
-          "ignore_severity": 0
+          "ignore_severity": 0,
+          "hush_until": ""
         })
         .then(function(){rmStatus($scope, name);})
       );
